@@ -1,28 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
+using SmartFactory.Data;
+using SmartFactory.Models;
 
 namespace RobotService
 {
-    // --- COLE A CLASSE DE IMPLEMENTAÇÃO AQUI ---
     public class MachineService : IMachineService
     {
-        public List<SensorData> GetCurrentSensors()
+        private readonly DbManager _db = new DbManager();
+
+        public SensorData[] GetCurrentSensors()
         {
-            return new List<SensorData>
-            {
-                new SensorData { Id = 1, Tipo = "Temp", Valor = 45.5 }
-            };
+            return _db.GetLatestReadings().ToArray();
         }
 
-        public List<MachineRule> GetAllRules()
+        public MachineRule[] GetAllRules()
         {
-            return new List<MachineRule>();
+            return _db.GetRules().ToArray();
         }
 
+        // SEM async, SEM Task, SEM await
         public string CreateNewRule(MachineRule newRule)
         {
-            return "Regra criada com sucesso";
+            try
+            {
+                return _db.CreateRule(newRule);
+            }
+            catch (Exception ex)
+            {
+                return "Erro: " + ex.Message;
+            }
         }
     }
 }

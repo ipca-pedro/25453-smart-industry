@@ -1,37 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.ServiceModel;
+using SmartFactory.Models;
 
 namespace RobotService
 {
-    // --- COLE A INTERFACE AQUI ---
     [ServiceContract]
     public interface IMachineService
     {
+        // Note que o retorno é SensorData[] (Array) e NÃO Task<...>
         [OperationContract]
-        List<SensorData> GetCurrentSensors();
+        SensorData[] GetCurrentSensors();
 
         [OperationContract]
-        List<MachineRule> GetAllRules();
+        MachineRule[] GetAllRules();
 
+        // O nome é apenas CreateNewRule. O retorno é string. NADA de Task.
         [OperationContract]
         string CreateNewRule(MachineRule newRule);
-    }
-
-    // --- COLE OS DTOs (SensorData e MachineRule) AQUI ---
-    [DataContract]
-    public class SensorData
-    {
-        [DataMember] public int Id { get; set; }
-        [DataMember] public string Tipo { get; set; }
-        [DataMember] public double Valor { get; set; }
-    }
-
-    [DataContract]
-    public class MachineRule
-    {
-        [DataMember] public int RuleId { get; set; }
-        [DataMember] public string Descricao { get; set; }
-        [DataMember] public double LimiteAtivacao { get; set; }
     }
 }
