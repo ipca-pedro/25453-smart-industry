@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.Data", "SmartF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.Soap", "SmartFactory.Soap\SmartFactory.Soap.csproj", "{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.API", "SmartFactory.API\SmartFactory.API.csproj", "{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

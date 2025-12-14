@@ -1,31 +1,28 @@
-﻿using System.Collections.Generic;
-using SmartFactory.Data;   // Tens de ter a referência ao projeto Data adicionada!
-using SmartFactory.Models; // Tens de ter a referência ao projeto Models adicionada!
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 
-namespace SmartFactory.Soap
+namespace RobotService
 {
+    // --- COLE A CLASSE DE IMPLEMENTAÇÃO AQUI ---
     public class MachineService : IMachineService
     {
-        private readonly DbManager _db;
-
-        public MachineService()
-        {
-            _db = new DbManager();
-        }
-
         public List<SensorData> GetCurrentSensors()
         {
-            return _db.GetLatestReadings();
+            return new List<SensorData>
+            {
+                new SensorData { Id = 1, Tipo = "Temp", Valor = 45.5 }
+            };
         }
 
         public List<MachineRule> GetAllRules()
         {
-            return _db.GetRules();
+            return new List<MachineRule>();
         }
 
         public string CreateNewRule(MachineRule newRule)
         {
-            return _db.CreateRule(newRule);
+            return "Regra criada com sucesso";
         }
     }
 }

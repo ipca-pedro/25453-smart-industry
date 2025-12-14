@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="SmartFactory.Soap.Service1" CodeBehind="MachineService.svc.cs" %>
+﻿<%@ ServiceHost Lang<%@ ServiceHost Language="C#" Debug="true" Service="RobotService.MachineService" CodeBehind="MachineService.svc.cs" %>
