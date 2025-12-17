@@ -102,5 +102,59 @@ namespace SmartFactory.Data
             }
             return "Regra criada com sucesso!";
         }
+
+        // Método para ATUALIZAR uma regra existente
+        public string UpdateRule(int id, double novoLimite, string novaDescricao)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sql = "UPDATE machine_rules SET limite_ativacao = @lim, descricao = @desc WHERE rule_id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("lim", novoLimite);
+                cmd.Parameters.AddWithValue("desc", novaDescricao);
+                cmd.Parameters.AddWithValue("id", id);
+
+                int linhas = cmd.ExecuteNonQuery();
+                if (linhas > 0) return "Sucesso";
+                else return "Regra não encontrada";
+            }
+            catch (Exception ex)
+            {
+                return "Erro: " + ex.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        // Método para APAGAR uma regra
+        public string DeleteRule(int id)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection(connString);
+            try
+            {
+                conn.Open();
+                string sql = "DELETE FROM machine_rules WHERE rule_id = @id";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("id", id);
+
+                int linhas = cmd.ExecuteNonQuery();
+                if (linhas > 0) return "Sucesso";
+                else return "Regra não encontrada";
+            }
+            catch (Exception ex)
+            {
+                return "Erro: " + ex.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

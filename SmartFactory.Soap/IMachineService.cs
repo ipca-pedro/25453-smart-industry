@@ -16,6 +16,12 @@ namespace RobotService
 
         [OperationContract]
         string CreateNewRule(MachineRule newRule);
+
+        [OperationContract]
+        string UpdateMachineRule(int ruleId, double limite, string descricao);
+
+        [OperationContract]
+        string DeleteMachineRule(int ruleId);
     }
 
     // NÃO definas classes aqui em baixo!
