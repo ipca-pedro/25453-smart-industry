@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq; // <--- Necessário para o .ToArray()
-using System.ServiceModel;
-using SmartFactory.Data;   // <--- Acesso à BD
-using SmartFactory.Models; // <--- Acesso aos Modelos
+using System.Linq;
+using SmartFactory.Data;
+using SmartFactory.Models;
 
 namespace RobotService
 {
     public class MachineService : IMachineService
     {
-        // Instancia o gestor de base de dados
         private readonly DbManager _db = new DbManager();
 
         public SensorData[] GetCurrentSensors()
         {
-            // Vai buscar os dados REAIS à BD e converte para Array
             return _db.GetLatestReadings().ToArray();
         }
 
@@ -25,14 +21,17 @@ namespace RobotService
 
         public string CreateNewRule(MachineRule newRule)
         {
-            try
-            {
-                return _db.CreateRule(newRule);
-            }
-            catch (Exception ex)
-            {
-                return "Erro: " + ex.Message;
-            }
+            return _db.CreateRule(newRule);
+        }
+
+        public string UpdateMachineRule(int ruleId, double limite, string descricao)
+        {
+            return _db.UpdateRule(ruleId, limite, descricao);
+        }
+
+        public string DeleteMachineRule(int ruleId)
+        {
+            return _db.DeleteRule(ruleId);
         }
     }
 }

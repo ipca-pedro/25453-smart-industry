@@ -106,7 +106,7 @@ namespace SmartFactory.Data
         // Método para ATUALIZAR uma regra existente
         public string UpdateRule(int id, double novoLimite, string novaDescricao)
         {
-            NpgsqlConnection conn = new NpgsqlConnection(connString);
+            NpgsqlConnection conn = new NpgsqlConnection(_connString);
             try
             {
                 conn.Open();
@@ -134,7 +134,7 @@ namespace SmartFactory.Data
         // Método para APAGAR uma regra
         public string DeleteRule(int id)
         {
-            NpgsqlConnection conn = new NpgsqlConnection(connString);
+            NpgsqlConnection conn = new NpgsqlConnection(_connString);
             try
             {
                 conn.Open();
