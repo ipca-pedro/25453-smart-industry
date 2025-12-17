@@ -6,7 +6,6 @@ namespace SmartFactory.WinApp
 {
     public partial class Form1 : Form
     {
-        // Cliente SOAP instanciado à moda antiga (Legacy Style)
         private MachineServiceClient cliente = new MachineServiceClient();
 
         public Form1()
@@ -14,14 +13,11 @@ namespace SmartFactory.WinApp
             InitializeComponent();
         }
 
-        // Evento que corre quando a App abre
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Opcional: Carregar a lista logo ao iniciar
             CarregarDados();
         }
 
-        // --- BOTÃO LISTAR (READ) ---
         private void btnListar_Click(object sender, EventArgs e)
         {
             CarregarDados();
@@ -31,7 +27,6 @@ namespace SmartFactory.WinApp
         {
             try
             {
-                // Chama o serviço SOAP e mete os dados na grelha automaticamente
                 MachineRule[] regras = cliente.GetAllRules();
                 dataGridView1.DataSource = regras;
             }
@@ -41,48 +36,48 @@ namespace SmartFactory.WinApp
             }
         }
 
-        // --- BOTÃO CRIAR (CREATE) ---
         private void btnCriar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Criar o objeto para enviar
                 MachineRule novaRegra = new MachineRule();
-                novaRegra.Descricao = txtDescricao.Text;
-                // Parse simples (Cuidado: num projeto real validar se é número)
-                novaRegra.LimiteAtivacao = double.Parse(txtLimite.Text);
-                novaRegra.Polo = txtPolo.Text;
+                // CORREÇÃO: Alinhado com a coluna rule_name do SQL
+                novaRegra.RuleName = txtDescricao.Text;
+                // CORREÇÃO: Alinhado com a coluna threshold_value do SQL
+                novaRegra.ThresholdValue = double.Parse(txtLimite.Text);
 
-                // Enviar para o servidor
+                // Campos adicionais presentes na tabela machine_rules
+                novaRegra.TargetSensorId = txtPolo.Text; // Usando txtPolo para o sensor como exemplo
+                novaRegra.IsActive = true;
+
                 string resposta = cliente.CreateNewRule(novaRegra);
 
                 MessageBox.Show(resposta);
-                CarregarDados(); // Atualiza a lista
+                CarregarDados();
                 LimparCampos();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao criar: Verifique se os números estão corretos.\n" + ex.Message);
+                MessageBox.Show("Erro ao criar: Verifique os dados.\n" + ex.Message);
             }
         }
 
-        // --- BOTÃO ATUALIZAR (UPDATE) ---
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (string.IsNullOrEmpty(txtId.Text))
                 {
-                    MessageBox.Show("Selecione uma regra ou escreva o ID para atualizar.");
+                    MessageBox.Show("Selecione uma regra ou escreva o ID.");
                     return;
                 }
 
                 int idParaAtualizar = int.Parse(txtId.Text);
                 double novoLimite = double.Parse(txtLimite.Text);
-                string novaDescricao = txtDescricao.Text;
+                string novoNome = txtDescricao.Text;
 
-                // Chama o novo método que criámos no serviço
-                string resposta = cliente.UpdateMachineRule(idParaAtualizar, novoLimite, novaDescricao);
+                // CORREÇÃO: Passando os parâmetros com os nomes lógicos corretos
+                string resposta = cliente.UpdateMachineRule(idParaAtualizar, novoLimite, novoNome);
 
                 MessageBox.Show(resposta);
                 CarregarDados();
@@ -94,25 +89,14 @@ namespace SmartFactory.WinApp
             }
         }
 
-        // --- BOTÃO APAGAR (DELETE) ---
         private void btnApagar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(txtId.Text))
-                {
-                    MessageBox.Show("Escreva o ID da regra que quer apagar.");
-                    return;
-                }
+                if (string.IsNullOrEmpty(txtId.Text)) return;
 
                 int idParaApagar = int.Parse(txtId.Text);
-
-                // Confirmação de segurança
-                DialogResult confirmacao = MessageBox.Show(
-                    "Tem a certeza que quer apagar a regra " + idParaApagar + "?",
-                    "Confirmar",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
+                DialogResult confirmacao = MessageBox.Show("Apagar regra " + idParaApagar + "?", "Confirmar", MessageBoxButtons.YesNo);
 
                 if (confirmacao == DialogResult.Yes)
                 {
@@ -128,28 +112,25 @@ namespace SmartFactory.WinApp
             }
         }
 
-        // --- EXTRAS: Preencher caixas ao clicar na grelha ---
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Evitar erro se clicar no cabeçalho
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow linha = dataGridView1.Rows[e.RowIndex];
 
-                // Preencher as caixas com os dados da linha selecionada
-                txtId.Text = linha.Cells["RuleId"].Value.ToString();
-                txtDescricao.Text = linha.Cells["Descricao"].Value.ToString();
-                txtLimite.Text = linha.Cells["LimiteAtivacao"].Value.ToString();
-                txtPolo.Text = linha.Cells["Polo"].Value.ToString();
+                // CORREÇÃO: Os nomes das colunas na Grelha devem bater com a Model
+                txtId.Text = linha.Cells["Id"].Value.ToString();
+                txtDescricao.Text = linha.Cells["RuleName"].Value.ToString();
+                txtLimite.Text = linha.Cells["ThresholdValue"].Value.ToString();
             }
         }
 
         private void LimparCampos()
         {
-            txtId.Text = "";
-            txtDescricao.Text = "";
-            txtLimite.Text = "";
-            txtPolo.Text = "";
+            txtId.Clear();
+            txtDescricao.Clear();
+            txtLimite.Clear();
+            txtPolo.Clear();
         }
     }
 }

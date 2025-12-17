@@ -25,6 +25,18 @@
   <wsdl:message name="IMachineService_CreateNewRule_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateNewRuleResponse" />
   </wsdl:message>
+  <wsdl:message name="IMachineService_UpdateMachineRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMachineRule" />
+  </wsdl:message>
+  <wsdl:message name="IMachineService_UpdateMachineRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateMachineRuleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMachineService_DeleteMachineRule_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMachineRule" />
+  </wsdl:message>
+  <wsdl:message name="IMachineService_DeleteMachineRule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMachineRuleResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMachineService">
     <wsdl:operation name="GetCurrentSensors">
       <wsdl:input wsaw:Action="http://tempuri.org/IMachineService/GetCurrentSensors" message="tns:IMachineService_GetCurrentSensors_InputMessage" />
@@ -37,6 +49,14 @@
     <wsdl:operation name="CreateNewRule">
       <wsdl:input wsaw:Action="http://tempuri.org/IMachineService/CreateNewRule" message="tns:IMachineService_CreateNewRule_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMachineService/CreateNewRuleResponse" message="tns:IMachineService_CreateNewRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMachineRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMachineService/UpdateMachineRule" message="tns:IMachineService_UpdateMachineRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMachineService/UpdateMachineRuleResponse" message="tns:IMachineService_UpdateMachineRule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMachineRule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMachineService/DeleteMachineRule" message="tns:IMachineService_DeleteMachineRule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMachineService/DeleteMachineRuleResponse" message="tns:IMachineService_DeleteMachineRule_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMachineService" type="tns:IMachineService">
@@ -61,6 +81,24 @@
     </wsdl:operation>
     <wsdl:operation name="CreateNewRule">
       <soap:operation soapAction="http://tempuri.org/IMachineService/CreateNewRule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMachineRule">
+      <soap:operation soapAction="http://tempuri.org/IMachineService/UpdateMachineRule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMachineRule">
+      <soap:operation soapAction="http://tempuri.org/IMachineService/DeleteMachineRule" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

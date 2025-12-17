@@ -39,4 +39,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateMachineRule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ruleId" type="xs:int" />
+        <xs:element minOccurs="0" name="limite" type="xs:double" />
+        <xs:element minOccurs="0" name="descricao" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateMachineRuleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateMachineRuleResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteMachineRule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ruleId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteMachineRuleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteMachineRuleResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

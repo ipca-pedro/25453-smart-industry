@@ -13,7 +13,7 @@ namespace SmartFactory.Models
         public string TargetSensorId { get; set; }
 
         [DataMember]
-        public string RuleName { get; set; }
+        public string RuleName { get; set; } 
 
         [DataMember]
         public double ThresholdValue { get; set; }

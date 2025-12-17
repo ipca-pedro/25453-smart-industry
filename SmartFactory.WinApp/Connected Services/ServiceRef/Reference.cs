@@ -284,6 +284,18 @@ namespace SmartFactory.WinApp.ServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMachineService/CreateNewRule", ReplyAction="http://tempuri.org/IMachineService/CreateNewRuleResponse")]
         System.Threading.Tasks.Task<string> CreateNewRuleAsync(SmartFactory.WinApp.ServiceRef.MachineRule newRule);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMachineService/UpdateMachineRule", ReplyAction="http://tempuri.org/IMachineService/UpdateMachineRuleResponse")]
+        string UpdateMachineRule(int ruleId, double limite, string descricao);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMachineService/UpdateMachineRule", ReplyAction="http://tempuri.org/IMachineService/UpdateMachineRuleResponse")]
+        System.Threading.Tasks.Task<string> UpdateMachineRuleAsync(int ruleId, double limite, string descricao);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMachineService/DeleteMachineRule", ReplyAction="http://tempuri.org/IMachineService/DeleteMachineRuleResponse")]
+        string DeleteMachineRule(int ruleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMachineService/DeleteMachineRule", ReplyAction="http://tempuri.org/IMachineService/DeleteMachineRuleResponse")]
+        System.Threading.Tasks.Task<string> DeleteMachineRuleAsync(int ruleId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -335,6 +347,22 @@ namespace SmartFactory.WinApp.ServiceRef {
         
         public System.Threading.Tasks.Task<string> CreateNewRuleAsync(SmartFactory.WinApp.ServiceRef.MachineRule newRule) {
             return base.Channel.CreateNewRuleAsync(newRule);
+        }
+        
+        public string UpdateMachineRule(int ruleId, double limite, string descricao) {
+            return base.Channel.UpdateMachineRule(ruleId, limite, descricao);
+        }
+        
+        public System.Threading.Tasks.Task<string> UpdateMachineRuleAsync(int ruleId, double limite, string descricao) {
+            return base.Channel.UpdateMachineRuleAsync(ruleId, limite, descricao);
+        }
+        
+        public string DeleteMachineRule(int ruleId) {
+            return base.Channel.DeleteMachineRule(ruleId);
+        }
+        
+        public System.Threading.Tasks.Task<string> DeleteMachineRuleAsync(int ruleId) {
+            return base.Channel.DeleteMachineRuleAsync(ruleId);
         }
     }
 }
