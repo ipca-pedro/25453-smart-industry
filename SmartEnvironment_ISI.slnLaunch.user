@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "SmartFactory.Soap\\SmartFactory.Soap.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "SmartFactory.Client\\SmartFactory.Client.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "SmartFactory.API\\SmartFactory.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

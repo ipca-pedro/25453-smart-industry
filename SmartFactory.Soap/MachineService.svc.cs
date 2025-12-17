@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq; // <--- Necessário para o .ToArray()
 using System.ServiceModel;
-using SmartFactory.Data;   // Acesso à BD
-using SmartFactory.Models; // Acesso aos DTOs
+using SmartFactory.Data;   // <--- Acesso à BD
+using SmartFactory.Models; // <--- Acesso aos Modelos
 
 namespace RobotService
 {
@@ -14,7 +14,7 @@ namespace RobotService
 
         public SensorData[] GetCurrentSensors()
         {
-            // Pede a lista à BD e converte para Array para o WCF ficar feliz
+            // Vai buscar os dados REAIS à BD e converte para Array
             return _db.GetLatestReadings().ToArray();
         }
 
@@ -31,7 +31,7 @@ namespace RobotService
             }
             catch (Exception ex)
             {
-                return "Erro no servidor: " + ex.Message;
+                return "Erro: " + ex.Message;
             }
         }
     }

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using SmartFactory.Models; 
+using SmartFactory.Models; // <--- OBRIGATÓRIO: Usa os teus modelos oficiais
 
 namespace RobotService
 {
     [ServiceContract]
     public interface IMachineService
     {
-        // Usamos Array [] porque o WCF Test Client gosta mais do que List<>
+        // Mudamos de List<> para Array [] para o WCF Test Client não dar erro
         [OperationContract]
         SensorData[] GetCurrentSensors();
 
@@ -18,5 +18,5 @@ namespace RobotService
         string CreateNewRule(MachineRule newRule);
     }
 
-    // NÃO definas classes SensorData aqui em baixo! Elas já vêm do SmartFactory.Models
+    // NÃO definas classes aqui em baixo!
 }

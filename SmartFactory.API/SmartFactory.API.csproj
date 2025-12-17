@@ -156,6 +156,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SensorsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -305,6 +306,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartFactory.Data\SmartFactory.Data.csproj">
+      <Project>{81cb4a97-5c78-4570-8ffb-f67f06c4c241}</Project>
+      <Name>SmartFactory.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartFactory.Models\SmartFactory.Models.csproj">
+      <Project>{a156e7e6-f701-4008-a950-56ece52759b5}</Project>
+      <Name>SmartFactory.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
