@@ -1,13 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 using SmartFactory.Data;
 using SmartFactory.Models;
 
-namespace RobotService
+namespace SmartFactory.Soap
 {
     public class MachineService : IMachineService
     {
-        private readonly DbManager _db = new DbManager();
+        private DbManager _db = new DbManager();
 
         public SensorData[] GetCurrentSensors()
         {
@@ -19,19 +18,21 @@ namespace RobotService
             return _db.GetRules().ToArray();
         }
 
-        public string CreateNewRule(MachineRule newRule)
+        public bool CreateNewRule(MachineRule rule)
         {
-            return _db.CreateRule(newRule);
+            return _db.CreateRule(rule);
         }
 
-        public string UpdateMachineRule(int ruleId, double limite, string descricao)
+        public bool DeleteMachineRule(int id)
         {
-            return _db.UpdateRule(ruleId, limite, descricao);
+            return _db.DeleteRule(id);
         }
 
-        public string DeleteMachineRule(int ruleId)
+        // Implementação da Intervenção Manual com Log
+        public bool SetMachinePerformance(int ruleId, double newThreshold, string machineName)
         {
-            return _db.DeleteRule(ruleId);
+            // O SOAP chama o DbManager que tem a transação e as queries hardcoded
+            return _db.ExecuteManualIntervention(ruleId, newThreshold, machineName);
         }
     }
 }

@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Npgsql; // O Driver do Postgres
+using Npgsql;
 using SmartFactory.Models;
 
 namespace SmartFactory.Data
 {
     public class DbManager
     {
-        // ATENÇÃO: Confirma a password/user do teu Docker
-        private readonly string _connString = "Host=localhost;Port=5432;Database=iotdb;Username=admin;Password=changeme";
+        private static readonly string _connString = "Host=localhost;Port=5432;Database=iotdb;Username=admin;Password=changeme";
 
-        // --- 1. LER DADOS DOS SENSORES (Do TP1) ---
+        // --- 1. LEITURA DE SENSORES (Dashboard REST) ---
         public List<SensorData> GetLatestReadings()
         {
             var list = new List<SensorData>();
-
             try
             {
                 using (var conn = new NpgsqlConnection(_connString))
                 {
                     conn.Open();
-                    // Vai buscar a leitura mais recente de cada sensor distinto
+                    // Query Hardcoded para os dados do Projeto 1
                     string sql = "SELECT DISTINCT ON (sensor) sensor, \"Polo\", \"Valor\", \"Unidade\", \"DataHora\" " +
-                                 "FROM public.dados_sensores_limpos " +
-                                 "ORDER BY sensor, \"DataHora\" DESC";
+                                 "FROM public.dados_sensores_limpos ORDER BY sensor, \"DataHora\" DESC";
 
                     using (var cmd = new NpgsqlCommand(sql, conn))
                     using (var reader = cmd.ExecuteReader())
@@ -42,23 +39,18 @@ namespace SmartFactory.Data
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                // Em produção deves usar Logs reais. Aqui atiramos o erro para ver no WCF Test Client.
-                throw new Exception("Erro ao ler BD: " + ex.Message);
-            }
+            catch (Exception ex) { throw new Exception("Erro ao ler sensores: " + ex.Message); }
             return list;
         }
 
-        // --- 2. LER REGRAS (SELECT) ---
+        // --- 2. CRUD: LER REGRAS (SELECT) ---
         public List<MachineRule> GetRules()
         {
             var list = new List<MachineRule>();
             using (var conn = new NpgsqlConnection(_connString))
             {
                 conn.Open();
-                string sql = "SELECT * FROM public.machine_rules";
-
+                string sql = "SELECT * FROM public.machine_rules ORDER BY id ASC";
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -80,15 +72,14 @@ namespace SmartFactory.Data
             return list;
         }
 
-        // --- 3. CRIAR REGRA (INSERT) ---
-        public string CreateRule(MachineRule rule)
+        // --- 3. CRUD: CRIAR REGRA (INSERT) ---
+        public bool CreateRule(MachineRule rule)
         {
             using (var conn = new NpgsqlConnection(_connString))
             {
                 conn.Open();
-                string sql = "INSERT INTO public.machine_rules (target_sensor_id, rule_name, threshold_value, condition_type, action_command) " +
-                             "VALUES (@sensor, @name, @val, @cond, @act)";
-
+                string sql = "INSERT INTO public.machine_rules (target_sensor_id, rule_name, threshold_value, condition_type, action_command, is_active) " +
+                             "VALUES (@sensor, @name, @val, @cond, @act, @active)";
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("sensor", rule.TargetSensorId);
@@ -96,64 +87,66 @@ namespace SmartFactory.Data
                     cmd.Parameters.AddWithValue("val", rule.ThresholdValue);
                     cmd.Parameters.AddWithValue("cond", rule.ConditionType);
                     cmd.Parameters.AddWithValue("act", rule.ActionCommand);
-
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("active", rule.IsActive);
+                    return cmd.ExecuteNonQuery() > 0;
                 }
             }
-            return "Regra criada com sucesso!";
         }
 
-        // Método para ATUALIZAR uma regra existente
-        public string UpdateRule(int id, double novoLimite, string novaDescricao)
+        // --- 4. CRUD: ATUALIZAÇÃO E INTERVENÇÃO (UPDATE + LOG) ---
+        // Este método é o coração da tua WinApp (Inputs Manuais)
+        public bool ExecuteManualIntervention(int ruleId, double newThreshold, string machineName)
         {
-            NpgsqlConnection conn = new NpgsqlConnection(_connString);
-            try
+            using (var conn = new NpgsqlConnection(_connString))
             {
                 conn.Open();
-                string sql = "UPDATE machine_rules SET limite_ativacao = @lim, descricao = @desc WHERE rule_id = @id";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
+                using (var trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 4a. Update Hardcoded
+                        string sqlUpdate = "UPDATE public.machine_rules SET threshold_value = @val WHERE id = @id";
+                        using (var cmd = new NpgsqlCommand(sqlUpdate, conn))
+                        {
+                            cmd.Parameters.AddWithValue("val", newThreshold);
+                            cmd.Parameters.AddWithValue("id", ruleId);
+                            cmd.ExecuteNonQuery();
+                        }
 
-                cmd.Parameters.AddWithValue("lim", novoLimite);
-                cmd.Parameters.AddWithValue("desc", novaDescricao);
-                cmd.Parameters.AddWithValue("id", id);
+                        // 4b. Insert Log Hardcoded (Audit Trail)
+                        string sqlLog = "INSERT INTO public.machine_logs (machine_name, event_description, event_timestamp) " +
+                                        "VALUES (@name, @desc, CURRENT_TIMESTAMP)";
+                        using (var cmd = new NpgsqlCommand(sqlLog, conn))
+                        {
+                            cmd.Parameters.AddWithValue("name", machineName);
+                            cmd.Parameters.AddWithValue("desc", $"Ajuste Manual: Performance/Threshold alterado para {newThreshold}");
+                            cmd.ExecuteNonQuery();
+                        }
 
-                int linhas = cmd.ExecuteNonQuery();
-                if (linhas > 0) return "Sucesso";
-                else return "Regra não encontrada";
-            }
-            catch (Exception ex)
-            {
-                return "Erro: " + ex.Message;
-            }
-            finally
-            {
-                conn.Close();
+                        trans.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
             }
         }
 
-        // Método para APAGAR uma regra
-        public string DeleteRule(int id)
+        // --- 5. CRUD: APAGAR REGRA (DELETE) ---
+        public bool DeleteRule(int id)
         {
-            NpgsqlConnection conn = new NpgsqlConnection(_connString);
-            try
+            using (var conn = new NpgsqlConnection(_connString))
             {
                 conn.Open();
-                string sql = "DELETE FROM machine_rules WHERE rule_id = @id";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
-
-                cmd.Parameters.AddWithValue("id", id);
-
-                int linhas = cmd.ExecuteNonQuery();
-                if (linhas > 0) return "Sucesso";
-                else return "Regra não encontrada";
-            }
-            catch (Exception ex)
-            {
-                return "Erro: " + ex.Message;
-            }
-            finally
-            {
-                conn.Close();
+                string sql = "DELETE FROM public.machine_rules WHERE id = @id";
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", id);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
     }

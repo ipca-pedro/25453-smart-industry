@@ -11,11 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.Soap", "SmartF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.API", "SmartFactory.API\SmartFactory.API.csproj", "{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.Client", "SmartFactory.Client\SmartFactory.Client.csproj", "{DBCF03FC-B73D-42E7-A954-3EF73D1CB413}"
-	ProjectSection(ProjectDependencies) = postProject
-		{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C} = {3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFactory.WinApp", "SmartFactory.WinApp\SmartFactory.WinApp.csproj", "{1BD05BE1-8F6E-4150-A5E2-20DA46B26277}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C} = {3C5E1F12-AA5A-4E9E-907C-E36A78ECE62C}
@@ -43,10 +38,6 @@ Global
 		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ACFCF59-254B-4BC0-96E5-46E09B977F8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBCF03FC-B73D-42E7-A954-3EF73D1CB413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBCF03FC-B73D-42E7-A954-3EF73D1CB413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBCF03FC-B73D-42E7-A954-3EF73D1CB413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBCF03FC-B73D-42E7-A954-3EF73D1CB413}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BD05BE1-8F6E-4150-A5E2-20DA46B26277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BD05BE1-8F6E-4150-A5E2-20DA46B26277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BD05BE1-8F6E-4150-A5E2-20DA46B26277}.Release|Any CPU.ActiveCfg = Release|Any CPU

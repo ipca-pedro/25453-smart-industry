@@ -1,27 +1,28 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using SmartFactory.Models;
 
-namespace RobotService
+namespace SmartFactory.Soap
 {
     [ServiceContract]
     public interface IMachineService
     {
-        // Ler Sensores
+        // --- Leituras ---
         [OperationContract]
         SensorData[] GetCurrentSensors();
 
-        // --- CRUD DE REGRAS ---
-
+        // --- CRUD de Regras ---
         [OperationContract]
         MachineRule[] GetAllRules();
 
         [OperationContract]
-        string CreateNewRule(MachineRule newRule);
+        bool CreateNewRule(MachineRule rule);
 
         [OperationContract]
-        string UpdateMachineRule(int ruleId, double limite, string descricao);
+        bool DeleteMachineRule(int id);
 
+        // Este método permite alterar o threshold e gravar o log numa só transação
         [OperationContract]
-        string DeleteMachineRule(int ruleId);
+        bool SetMachinePerformance(int ruleId, double newThreshold, string machineName);
     }
 }

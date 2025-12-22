@@ -2,15 +2,8 @@
 {
     partial class Form1
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,208 +13,97 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnListar = new System.Windows.Forms.Button();
-            this.btnCriar = new System.Windows.Forms.Button();
-            this.btnAtualizar = new System.Windows.Forms.Button();
-            this.btnApagar = new System.Windows.Forms.Button();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.dgvSensors = new System.Windows.Forms.DataGridView();
+            this.monitoringTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnApplyPerformance = new System.Windows.Forms.Button();
+            this.numPerformance = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLimite = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPolo = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.lblSelectedMachine = new System.Windows.Forms.Label();
+            this.txtConsole = new System.Windows.Forms.TextBox();
+            this.lblLastUpdate = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSensors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPerformance)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 192);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 320);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // btnListar
-            // 
-            this.btnListar.BackColor = System.Drawing.Color.LightBlue;
-            this.btnListar.Location = new System.Drawing.Point(647, 21);
-            this.btnListar.Name = "btnListar";
-            this.btnListar.Size = new System.Drawing.Size(123, 45);
-            this.btnListar.TabIndex = 1;
-            this.btnListar.Text = "🔄 Listar Regras";
-            this.btnListar.UseVisualStyleBackColor = false;
-            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
-            // 
-            // btnCriar
-            // 
-            this.btnCriar.BackColor = System.Drawing.Color.LightGreen;
-            this.btnCriar.Location = new System.Drawing.Point(389, 21);
-            this.btnCriar.Name = "btnCriar";
-            this.btnCriar.Size = new System.Drawing.Size(120, 35);
-            this.btnCriar.TabIndex = 2;
-            this.btnCriar.Text = "➕ Criar Nova";
-            this.btnCriar.UseVisualStyleBackColor = false;
-            this.btnCriar.Click += new System.EventHandler(this.btnCriar_Click);
-            // 
-            // btnAtualizar
-            // 
-            this.btnAtualizar.BackColor = System.Drawing.Color.LightYellow;
-            this.btnAtualizar.Location = new System.Drawing.Point(389, 62);
-            this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(120, 35);
-            this.btnAtualizar.TabIndex = 3;
-            this.btnAtualizar.Text = "💾 Atualizar";
-            this.btnAtualizar.UseVisualStyleBackColor = false;
-            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
-            // 
-            // btnApagar
-            // 
-            this.btnApagar.BackColor = System.Drawing.Color.LightCoral;
-            this.btnApagar.Location = new System.Drawing.Point(389, 103);
-            this.btnApagar.Name = "btnApagar";
-            this.btnApagar.Size = new System.Drawing.Size(120, 35);
-            this.btnApagar.TabIndex = 4;
-            this.btnApagar.Text = "🗑️ Apagar";
-            this.btnApagar.UseVisualStyleBackColor = false;
-            this.btnApagar.Click += new System.EventHandler(this.btnApagar_Click);
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(109, 32);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(65, 22);
-            this.txtId.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 16);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "ID:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 16);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Descrição:";
-            // 
-            // txtDescricao
-            // 
-            this.txtDescricao.Location = new System.Drawing.Point(109, 65);
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(243, 22);
-            this.txtDescricao.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 103);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 16);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Limite:";
-            // 
-            // txtLimite
-            // 
-            this.txtLimite.Location = new System.Drawing.Point(109, 100);
-            this.txtLimite.Name = "txtLimite";
-            this.txtLimite.Size = new System.Drawing.Size(100, 22);
-            this.txtLimite.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 137);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 16);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Polo:";
-            // 
-            // txtPolo
-            // 
-            this.txtPolo.Location = new System.Drawing.Point(109, 134);
-            this.txtPolo.Name = "txtPolo";
-            this.txtPolo.Size = new System.Drawing.Size(100, 22);
-            this.txtPolo.TabIndex = 11;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtPolo);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.btnApagar);
-            this.groupBox1.Controls.Add(this.txtLimite);
-            this.groupBox1.Controls.Add(this.btnAtualizar);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.btnCriar);
-            this.groupBox1.Controls.Add(this.txtDescricao);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtId);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(532, 174);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Dados da Regra";
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 524);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnListar);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
-            this.Text = "Painel de Controlo - Smart Industry";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
 
+            // dgvSensors
+            this.dgvSensors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSensors.Location = new System.Drawing.Point(12, 40);
+            this.dgvSensors.MultiSelect = false;
+            this.dgvSensors.Name = "dgvSensors";
+            this.dgvSensors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSensors.Size = new System.Drawing.Size(540, 250);
+            this.dgvSensors.SelectionChanged += new System.EventHandler(this.dgvSensors_SelectionChanged);
+
+            // monitoringTimer
+            this.monitoringTimer.Interval = 5000; // 5 segundos
+            this.monitoringTimer.Tick += new System.EventHandler(this.monitoringTimer_Tick);
+
+            // btnApplyPerformance
+            this.btnApplyPerformance.Location = new System.Drawing.Point(570, 120);
+            this.btnApplyPerformance.Name = "btnApplyPerformance";
+            this.btnApplyPerformance.Size = new System.Drawing.Size(150, 30);
+            this.btnApplyPerformance.Text = "Aplicar Intervenção";
+            this.btnApplyPerformance.Click += new System.EventHandler(this.btnApplyPerformance_Click);
+
+            // numPerformance
+            this.numPerformance.Location = new System.Drawing.Point(570, 90);
+            this.numPerformance.Name = "numPerformance";
+            this.numPerformance.Size = new System.Drawing.Size(150, 20);
+            this.numPerformance.Value = new decimal(new int[] { 100, 0, 0, 0 });
+
+            // label1 (Título Performance)
+            this.label1.Location = new System.Drawing.Point(570, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 20);
+            this.label1.Text = "Nova Performance (%):";
+
+            // lblSelectedMachine
+            this.lblSelectedMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblSelectedMachine.Location = new System.Drawing.Point(570, 40);
+            this.lblSelectedMachine.Name = "lblSelectedMachine";
+            this.lblSelectedMachine.Size = new System.Drawing.Size(200, 23);
+            this.lblSelectedMachine.Text = "Máquina: Nenhuma";
+
+            // txtConsole
+            this.txtConsole.Location = new System.Drawing.Point(12, 310);
+            this.txtConsole.Multiline = true;
+            this.txtConsole.Name = "txtConsole";
+            this.txtConsole.ReadOnly = true;
+            this.txtConsole.Size = new System.Drawing.Size(708, 100);
+
+            // lblLastUpdate
+            this.lblLastUpdate.Location = new System.Drawing.Point(12, 15);
+            this.lblLastUpdate.Name = "lblLastUpdate";
+            this.lblLastUpdate.Size = new System.Drawing.Size(300, 23);
+            this.lblLastUpdate.Text = "A aguardar atualização...";
+
+            // Form1
+            this.ClientSize = new System.Drawing.Size(734, 431);
+            this.Controls.Add(this.lblLastUpdate);
+            this.Controls.Add(this.txtConsole);
+            this.Controls.Add(this.lblSelectedMachine);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numPerformance);
+            this.Controls.Add(this.btnApplyPerformance);
+            this.Controls.Add(this.dgvSensors);
+            this.Name = "Form1";
+            this.Text = "SmartFactory - Gestão Industrial Híbrida (REST/SOAP)";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSensors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPerformance)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
-        #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnListar;
-        private System.Windows.Forms.Button btnCriar;
-        private System.Windows.Forms.Button btnAtualizar;
-        private System.Windows.Forms.Button btnApagar;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.DataGridView dgvSensors;
+        private System.Windows.Forms.Timer monitoringTimer;
+        private System.Windows.Forms.Button btnApplyPerformance;
+        private System.Windows.Forms.NumericUpDown numPerformance;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtDescricao;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtLimite;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtPolo;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblSelectedMachine;
+        private System.Windows.Forms.TextBox txtConsole;
+        private System.Windows.Forms.Label lblLastUpdate;
     }
 }
