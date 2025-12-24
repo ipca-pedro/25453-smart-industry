@@ -18,92 +18,98 @@
             this.components = new System.ComponentModel.Container();
             this.dgvSensors = new System.Windows.Forms.DataGridView();
             this.monitoringTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnApplyPerformance = new System.Windows.Forms.Button();
-            this.numPerformance = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblSelectedMachine = new System.Windows.Forms.Label();
-            this.txtConsole = new System.Windows.Forms.TextBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.lblLastUpdate = new System.Windows.Forms.Label();
+            this.groupIntervention = new System.Windows.Forms.GroupBox();
+            this.lblSelectedInfo = new System.Windows.Forms.Label();
+            this.numPerformance = new System.Windows.Forms.NumericUpDown();
+            this.lblPerf = new System.Windows.Forms.Label();
+            this.btnApplyIntervention = new System.Windows.Forms.Button();
+            this.txtConsole = new System.Windows.Forms.TextBox();
+            this.lblConsole = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSensors)).BeginInit();
+            this.panelHeader.SuspendLayout();
+            this.groupIntervention.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPerformance)).BeginInit();
             this.SuspendLayout();
 
-            // dgvSensors
-            this.dgvSensors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSensors.Location = new System.Drawing.Point(12, 40);
-            this.dgvSensors.MultiSelect = false;
+            // panelHeader
+            this.panelHeader.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
+            this.panelHeader.Controls.Add(this.lblTitle);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Size = new System.Drawing.Size(850, 60);
+
+            // lblTitle
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Location = new System.Drawing.Point(12, 15);
+            this.lblTitle.Text = "SmartFactory Management Cockpit";
+
+            // dgvSensors (Dashboard)
+            this.dgvSensors.AllowUserToAddRows = false;
+            this.dgvSensors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSensors.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSensors.ColumnHeadersHeight = 30;
+            this.dgvSensors.Location = new System.Drawing.Point(12, 100);
             this.dgvSensors.Name = "dgvSensors";
+            this.dgvSensors.ReadOnly = true;
             this.dgvSensors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSensors.Size = new System.Drawing.Size(540, 250);
+            this.dgvSensors.Size = new System.Drawing.Size(550, 280);
             this.dgvSensors.SelectionChanged += new System.EventHandler(this.dgvSensors_SelectionChanged);
 
-            // monitoringTimer
-            this.monitoringTimer.Interval = 5000; // 5 segundos
-            this.monitoringTimer.Tick += new System.EventHandler(this.monitoringTimer_Tick);
+            // groupIntervention (Cockpit SOAP)
+            this.groupIntervention.Controls.Add(this.btnApplyIntervention);
+            this.groupIntervention.Controls.Add(this.lblPerf);
+            this.groupIntervention.Controls.Add(this.numPerformance);
+            this.groupIntervention.Controls.Add(this.lblSelectedInfo);
+            this.groupIntervention.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.groupIntervention.Location = new System.Drawing.Point(580, 100);
+            this.groupIntervention.Size = new System.Drawing.Size(250, 280);
+            this.groupIntervention.Text = "CONTROLO SOAP (WCF)";
 
-            // btnApplyPerformance
-            this.btnApplyPerformance.Location = new System.Drawing.Point(570, 120);
-            this.btnApplyPerformance.Name = "btnApplyPerformance";
-            this.btnApplyPerformance.Size = new System.Drawing.Size(150, 30);
-            this.btnApplyPerformance.Text = "Aplicar Intervenção";
-            this.btnApplyPerformance.Click += new System.EventHandler(this.btnApplyPerformance_Click);
+            this.lblSelectedInfo.Location = new System.Drawing.Point(15, 40);
+            this.lblSelectedInfo.Size = new System.Drawing.Size(220, 40);
+            this.lblSelectedInfo.Text = "Máquina: Nenhuma";
 
-            // numPerformance
-            this.numPerformance.Location = new System.Drawing.Point(570, 90);
-            this.numPerformance.Name = "numPerformance";
-            this.numPerformance.Size = new System.Drawing.Size(150, 20);
-            this.numPerformance.Value = new decimal(new int[] { 100, 0, 0, 0 });
+            this.lblPerf.Location = new System.Drawing.Point(15, 100);
+            this.lblPerf.Text = "Ajustar Performance (%):";
 
-            // label1 (Título Performance)
-            this.label1.Location = new System.Drawing.Point(570, 70);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 20);
-            this.label1.Text = "Nova Performance (%):";
+            this.numPerformance.Location = new System.Drawing.Point(15, 125);
+            this.numPerformance.Size = new System.Drawing.Size(100, 25);
+            this.numPerformance.Value = 100;
 
-            // lblSelectedMachine
-            this.lblSelectedMachine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            this.lblSelectedMachine.Location = new System.Drawing.Point(570, 40);
-            this.lblSelectedMachine.Name = "lblSelectedMachine";
-            this.lblSelectedMachine.Size = new System.Drawing.Size(200, 23);
-            this.lblSelectedMachine.Text = "Máquina: Nenhuma";
+            this.btnApplyIntervention.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnApplyIntervention.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApplyIntervention.Location = new System.Drawing.Point(15, 170);
+            this.btnApplyIntervention.Size = new System.Drawing.Size(220, 45);
+            this.btnApplyIntervention.Text = "APLICAR COMANDO";
+            this.btnApplyIntervention.Click += new System.EventHandler(this.btnApplyIntervention_Click);
 
-            // txtConsole
-            this.txtConsole.Location = new System.Drawing.Point(12, 310);
+            // Console de Auditoria
+            this.txtConsole.BackColor = System.Drawing.Color.Black;
+            this.txtConsole.ForeColor = System.Drawing.Color.Lime;
+            this.txtConsole.Font = new System.Drawing.Font("Consolas", 8F);
+            this.txtConsole.Location = new System.Drawing.Point(12, 410);
             this.txtConsole.Multiline = true;
-            this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(708, 100);
+            this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtConsole.Size = new System.Drawing.Size(820, 120);
 
             // lblLastUpdate
-            this.lblLastUpdate.Location = new System.Drawing.Point(12, 15);
-            this.lblLastUpdate.Name = "lblLastUpdate";
-            this.lblLastUpdate.Size = new System.Drawing.Size(300, 23);
-            this.lblLastUpdate.Text = "A aguardar atualização...";
+            this.lblLastUpdate.Location = new System.Drawing.Point(12, 75);
+            this.lblLastUpdate.Text = "A aguardar REST...";
 
             // Form1
-            this.ClientSize = new System.Drawing.Size(734, 431);
-            this.Controls.Add(this.lblLastUpdate);
+            this.ClientSize = new System.Drawing.Size(850, 550);
             this.Controls.Add(this.txtConsole);
-            this.Controls.Add(this.lblSelectedMachine);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numPerformance);
-            this.Controls.Add(this.btnApplyPerformance);
+            this.Controls.Add(this.groupIntervention);
             this.Controls.Add(this.dgvSensors);
+            this.Controls.Add(this.panelHeader);
+            this.Controls.Add(this.lblLastUpdate);
             this.Name = "Form1";
-            this.Text = "SmartFactory - Gestão Industrial Híbrida (REST/SOAP)";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSensors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numPerformance)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.Text = "SmartFactory v2.0 - Cockpit de Gestão";
         }
-
-        private System.Windows.Forms.DataGridView dgvSensors;
-        private System.Windows.Forms.Timer monitoringTimer;
-        private System.Windows.Forms.Button btnApplyPerformance;
-        private System.Windows.Forms.NumericUpDown numPerformance;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblSelectedMachine;
-        private System.Windows.Forms.TextBox txtConsole;
-        private System.Windows.Forms.Label lblLastUpdate;
     }
 }

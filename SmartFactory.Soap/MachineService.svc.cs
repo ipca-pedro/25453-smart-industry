@@ -34,5 +34,6 @@ namespace SmartFactory.Soap
             // O SOAP chama o DbManager que tem a transação e as queries hardcoded
             return _db.ExecuteManualIntervention(ruleId, newThreshold, machineName);
         }
+
     }
 }
